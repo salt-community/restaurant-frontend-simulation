@@ -1,9 +1,9 @@
-export type BlockType = "ORDER" | "PAYMENT" | "ADRESS" | "KITCHEN" | "DELIVERY" | "FINISH"
+export type BlockType = "ORDER" | "PAYMENT" | "ADDRESS" | "KITCHEN" | "DELIVERY" | "FINISH"
 
 export const BLOCK_TYPE: Record<BlockType, BlockType> = {
   ORDER: 'ORDER',
   PAYMENT: 'PAYMENT',
-  ADRESS: 'ADRESS',
+  ADDRESS: 'ADDRESS',
   KITCHEN: 'KITCHEN',
   DELIVERY: 'DELIVERY',
   FINISH: 'FINISH',
@@ -12,7 +12,7 @@ export const BLOCK_TYPE: Record<BlockType, BlockType> = {
 export const BLOCKS_ORDERED: BlockType[] = [
   BLOCK_TYPE.ORDER,
   BLOCK_TYPE.PAYMENT,
-  BLOCK_TYPE.ADRESS,
+  BLOCK_TYPE.ADDRESS,
   BLOCK_TYPE.KITCHEN,
   BLOCK_TYPE.DELIVERY,
   BLOCK_TYPE.FINISH,
