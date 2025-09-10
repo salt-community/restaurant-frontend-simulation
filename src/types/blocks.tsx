@@ -1,0 +1,19 @@
+export type BlockType = "ORDER" | "PAYMENT" | "ADRESS" | "KITCHEN" | "DELIVERY" | "FINISH"
+
+export const BLOCK_TYPE: Record<BlockType, BlockType> = {
+  ORDER: 'ORDER',
+  PAYMENT: 'PAYMENT',
+  ADRESS: 'ADRESS',
+  KITCHEN: 'KITCHEN',
+  DELIVERY: 'DELIVERY',
+  FINISH: 'FINISH',
+};
+
+export const BLOCKS_ORDERED: BlockType[] = [
+  BLOCK_TYPE.ORDER,
+  BLOCK_TYPE.PAYMENT,
+  BLOCK_TYPE.ADRESS,
+  BLOCK_TYPE.KITCHEN,
+  BLOCK_TYPE.DELIVERY,
+  BLOCK_TYPE.FINISH,
+]

@@ -1,0 +1,19 @@
+export type StepType = "ORDER" | "PAYMENT" | "ADRESS" | "KITCHEN" | "DELIVERY" | "FINISH"
+
+export const STEP_TYPE: Record<StepType, StepType> = {
+  ORDER: 'ORDER',
+  PAYMENT: 'PAYMENT',
+  ADRESS: 'ADRESS',
+  KITCHEN: 'KITCHEN',
+  DELIVERY: 'DELIVERY',
+  FINISH: 'FINISH',
+};
+
+export const STEPS_ORDERED: StepType[] = [
+  STEP_TYPE.ORDER,
+  STEP_TYPE.PAYMENT,
+  STEP_TYPE.ADRESS,
+  STEP_TYPE.KITCHEN,
+  STEP_TYPE.DELIVERY,
+  STEP_TYPE.FINISH,
+]
