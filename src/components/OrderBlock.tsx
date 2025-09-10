@@ -1,3 +1,8 @@
+import {fetchInventory} from "../api/fetchInventory.ts";
+
 export default function OrderBlock() {
-  return <a>Order Block</a>
+
+  return <div>
+    <h3>Order Block</h3>
+  </div>
 }
