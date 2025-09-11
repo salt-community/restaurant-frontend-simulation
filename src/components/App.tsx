@@ -1,7 +1,7 @@
 import SimulationBar from "@/components/progress_bar/SimulationBar.tsx";
 import {type JSX, useState} from "react";
 import OrderBlock from "@/components/blocks/Order/OrderBlock.tsx";
-import PaymentBlock from "@/components/blocks/PaymentBlock.tsx";
+import PaymentBlock from "@/components/blocks/Payment/PaymentBlock.tsx";
 import AddressBlock from "@/components/blocks/Address/AddressBlock.tsx";
 import KitchenBlock from "@/components/blocks/KitchenBlock.tsx";
 import DeliveryBlock from "@/components/blocks/DeliveryBlock.tsx";

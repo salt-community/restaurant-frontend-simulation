@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import PaymentForm from "@/components/blocks/Payment/PaymentForm.tsx";
 
 interface PaymentBlockProps {
   setButtonDisabled: (disabled: boolean) => void
@@ -6,7 +7,12 @@ interface PaymentBlockProps {
 
 export default function PaymentBlock({setButtonDisabled}: PaymentBlockProps) {
   useEffect(() => {
-    setButtonDisabled(false);
+    setButtonDisabled(true);
   }, []);
-  return <a>Payment Block</a>
+  return (
+    <>
+      <a>Payment Block</a>
+      <PaymentForm onSubmit={() => {setButtonDisabled(false)}}/>
+    </>
+  )
 }
