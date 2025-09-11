@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {fetchKitchenApproval} from "@/api/fetchKitchenApproval.ts";
 import Spinner from "@/components/util/Spinner.tsx";
+import {fetchDeliveryStatus} from "@/api/fetchDeliveryStatus.ts";
 
 interface DeliveryBlockProps {
   gotoNext: () => void
@@ -16,7 +16,8 @@ export default function DeliveryBlock({gotoNext}: DeliveryBlockProps) {
 
     (async () => {
       try {
-        await fetchKitchenApproval();
+        //TODO: replace with actual orderId
+        await fetchDeliveryStatus(crypto.randomUUID());
         if (!cancelled) {
           gotoNext()
           setLoading(false);

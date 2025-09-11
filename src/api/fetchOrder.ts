@@ -1,27 +1,30 @@
-import {getPaymentUrl} from "./util/getUrl.ts";
-import type {UUID} from "node:crypto";
+import {getOrderUrl} from "./util/getUrl.ts";
 import isMockedFetches from "@/api/util/isMockedFetches.ts";
 
-export async function fetchPayment(orderId: UUID, amount: number, providerPaymentId: string) {
+type OrderItem = {
+  itemId: number
+  quantity: number
+  price: number
+}
+
+export async function fetchOrder(orderItems: OrderItem[]) {
   if (isMockedFetches()) {
-    return mockPayment()
+    return mockOrder()
   } else {
-    const url = getPaymentUrl() + "api/payments/"
+    const url = getOrderUrl() + "api/order/"
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        orderId: orderId,
-        amount: amount,
-        providerPaymentId: providerPaymentId
+        items: orderItems
       }),
     })
     return response.json()
   }
 }
 
-async function mockPayment() {
+async function mockOrder() {
   return await new Promise<void>(resolve => setTimeout(resolve, 3000));
 }

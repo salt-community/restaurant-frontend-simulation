@@ -1,17 +1,17 @@
-import {getKitchenUrl} from "./util/getUrl.ts";
+import {getDeliveryUrl} from "./util/getUrl.ts";
 import isMockedFetches from "@/api/util/isMockedFetches.ts";
 import type {UUID} from "node:crypto";
 
-export async function fetchKitchenApproval(orderId: UUID) {
+export async function fetchDeliveryStatus(orderId: UUID) {
   if (isMockedFetches()) {
-    return mockKitchenApproval()
+    return mockDeliveryStatus()
   } else {
-    const url = getKitchenUrl() + "api/" + orderId + "/status"
+    const url = getDeliveryUrl() + "api/" + orderId + "/status"
     const response = await fetch(url)
     return response.json()
   }
 }
 
-async function mockKitchenApproval() {
+async function mockDeliveryStatus() {
   return await new Promise<void>(resolve => setTimeout(resolve, 3000));
 }

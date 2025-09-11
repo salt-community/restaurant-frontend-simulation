@@ -14,7 +14,8 @@ export default function KitchenBlock({gotoNext}: KitchenBlockProps) {
 
     (async () => {
       try {
-        await fetchKitchenApproval();
+        //TODO: replace with actual orderId
+        await fetchKitchenApproval(crypto.randomUUID());
         if (!cancelled) {
           gotoNext()
           setLoading(false);
