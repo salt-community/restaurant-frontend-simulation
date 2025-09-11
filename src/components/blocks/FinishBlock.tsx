@@ -8,5 +8,5 @@ export default function FinishBlock({setButtonDisabled}: FinishBlockProps) {
   useEffect(() => {
     setButtonDisabled(false);
   }, []);
-  return <a>Finish Block</a>
+  return <div className="text-green-700">- Delivered!</div>
 }

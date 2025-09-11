@@ -7,12 +7,12 @@ interface AdressBlockProps {
 
 export default function AddressBlock({setButtonDisabled}: AdressBlockProps) {
   useEffect(() => {
-    setButtonDisabled(false);
+    setButtonDisabled(true);
   }, []);
   return (
     <div>
       <a>Address Block</a>
-      <AddressForm onSubmit={() => {}}/>
+      <AddressForm onSubmit={() => {setButtonDisabled(false)}}/>
     </div>
   )
 }

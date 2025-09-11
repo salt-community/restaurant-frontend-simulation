@@ -1,10 +1,14 @@
 import {getKitchenUrl} from "./util/getUrl.ts";
+import isMockedFetches from "@/api/util/isMockedFetches.ts";
 
 export async function fetchInventory() {
-  // const url = getKitchenUrl() + "api/recipe/getAllRecipes"
-  // const response = await fetch(url)
-  // return response.json()
-  return mockInventory()
+  if (isMockedFetches()) {
+    return mockInventory()
+  } else {
+    const url = getKitchenUrl() + "api/recipe/getAllRecipes"
+    const response = await fetch(url)
+    return response.json()
+  }
 }
 
 function mockInventory() {
