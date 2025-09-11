@@ -19,25 +19,17 @@ export default function OrderBlock({buttonDisabled, setButtonDisabled}: OrderBlo
   const [cart, setCart] = useState<Array<number>>([])
 
   useEffect(() => {
-    let cancelled = false;
-
     (async () => {
       try {
         setLoading(true);
         setError(null);
         const data = await fetchInventory();
-        if (!cancelled) {
-          setInventory(data);
-          setCart(Array(data.length).fill(0))
-        }
+        setInventory(data);
+        setCart(Array(data.length).fill(0))
       } catch (e) {
-        if (!cancelled) {
-          setError(e instanceof Error ? e.message : "Failed to load inventory");
-        }
+        setError(e instanceof Error ? e.message : "Failed to load inventory");
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     })();
 
@@ -51,31 +43,33 @@ export default function OrderBlock({buttonDisabled, setButtonDisabled}: OrderBlo
     else if (buttonDisabled && cart.some(item => item != 0)) setButtonDisabled(false);
   }, [cart]);
 
-  return <div>
-    <h3>Order Block</h3>
-    {loading && <div>Loading inventory…</div>}
-    {error && <div style={{color: "red"}}>Error: {error}</div>}
-    {!loading && !error && (
-      <ul className="flex flex-col gap-2">
-        {inventory.map((item, idx) => (
-          <li key={item.id}>
-            <InventoryItem
-              name={item.name}
-              description={item.description}
-              availableAmount={item.availableAmount}
-              selectedAmount={cart[idx]}
-              setCart={(change: 1 | -1) => {
-                setCart(prev => {
-                  const next = [...prev]
-                  next[idx] = next[idx] + change
-                  return next
-                })
-              }}
-            />
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
+  return (
+    <div>
+      <h3>Order Block</h3>
+      {loading && <div>Loading inventory…</div>}
+      {error && <div style={{color: "red"}}>Error: {error}</div>}
+      {!loading && !error && (
+        <ul className="flex flex-col gap-2">
+          {inventory.map((item, idx) => (
+            <li key={item.id}>
+              <InventoryItem
+                name={item.name}
+                description={item.description}
+                availableAmount={item.availableAmount}
+                selectedAmount={cart[idx]}
+                setCart={(change: 1 | -1) => {
+                  setCart(prev => {
+                    const next = [...prev]
+                    next[idx] = next[idx] + change
+                    return next
+                  })
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
 
 }
