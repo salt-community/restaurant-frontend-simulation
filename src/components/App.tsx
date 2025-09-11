@@ -2,7 +2,7 @@ import SimulationBar from "@/components/progress_bar/SimulationBar.tsx";
 import {type JSX, useState} from "react";
 import OrderBlock from "@/components/blocks/Order/OrderBlock.tsx";
 import PaymentBlock from "@/components/blocks/PaymentBlock.tsx";
-import AddressBlock from "@/components/blocks/AdressBlock.tsx";
+import AddressBlock from "@/components/blocks/Address/AddressBlock.tsx";
 import KitchenBlock from "@/components/blocks/KitchenBlock.tsx";
 import DeliveryBlock from "@/components/blocks/DeliveryBlock.tsx";
 import FinishBlock from "@/components/blocks/FinishBlock.tsx";
@@ -13,7 +13,7 @@ function App() {
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const currentStep = BLOCKS_ORDERED.indexOf(currentBlock)
   const blockTypeMapToComponent: Record<BlockType, JSX.Element> = {
-    ORDER: <OrderBlock setButtonDisabled={setButtonDisabled}/>,
+    ORDER: <OrderBlock buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}/>,
     PAYMENT: <PaymentBlock setButtonDisabled={setButtonDisabled}/>,
     ADDRESS: <AddressBlock setButtonDisabled={setButtonDisabled}/>,
     KITCHEN: <KitchenBlock setButtonDisabled={setButtonDisabled}/>,
