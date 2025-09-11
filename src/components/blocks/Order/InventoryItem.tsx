@@ -8,6 +8,8 @@ interface InventoryItemProps {
 
 export default function InventoryItem({name, description, availableAmount, selectedAmount, setCart}: InventoryItemProps) {
   const disabled = availableAmount === 0
+  const reachedMax = selectedAmount === availableAmount
+  const reachedMin = selectedAmount === 0
 
   return <div
     aria-disabled={disabled}
@@ -15,21 +17,32 @@ export default function InventoryItem({name, description, availableAmount, selec
   >
     <a>{name}</a>
     {/*{item.name}</strong> — {item.description} (available: {item.availableAmount})*/}
-    <p>—  {description} (available: {availableAmount})</p>
-    <div>
-      <button
-        onClick={() => {
-          setCart(1)
-        }}
-        disabled={disabled || selectedAmount == availableAmount}
-      >+</button>
-      <a>{selectedAmount}</a>
-      <button
-        onClick={() => {
-          setCart(-1)
-        }}
-        disabled={disabled || selectedAmount == 0}
-      >-</button>
-    </div>
+    {
+      !disabled
+        ? (
+          <>
+            <p>—  {description} (available: {availableAmount})</p>
+            <div>
+              <button
+                className="disabled:opacity-30"
+                onClick={() => {
+                  setCart(1)
+                }}
+                disabled={reachedMax}
+              >+</button>
+              <a>{selectedAmount}</a>
+              <button
+                className="disabled:opacity-30"
+                onClick={() => {
+                  setCart(-1)
+                }}
+                disabled={reachedMin}
+              >-</button>
+            </div>
+          </>
+        )
+        : <p>—  {description} (Out of stock)</p>
+    }
+
   </div>
 }
