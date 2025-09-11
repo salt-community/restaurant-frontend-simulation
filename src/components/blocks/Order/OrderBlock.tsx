@@ -19,17 +19,25 @@ export default function OrderBlock({buttonDisabled, setButtonDisabled}: OrderBlo
   const [cart, setCart] = useState<Array<number>>([])
 
   useEffect(() => {
+    let cancelled = false;
+
     (async () => {
       try {
         setLoading(true);
         setError(null);
         const data = await fetchInventory();
-        setInventory(data);
-        setCart(Array(data.length).fill(0))
+        if (!cancelled) {
+          setInventory(data);
+          setCart(Array(data.length).fill(0))
+        }
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Failed to load inventory");
+        if (!cancelled) {
+          setError(e instanceof Error ? e.message : "Failed to load inventory");
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     })();
 
