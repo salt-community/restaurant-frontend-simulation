@@ -3,8 +3,8 @@ import {type JSX, useState} from "react";
 import OrderBlock from "@/components/blocks/Order/OrderBlock.tsx";
 import PaymentBlock from "@/components/blocks/Payment/PaymentBlock.tsx";
 import AddressBlock from "@/components/blocks/Address/AddressBlock.tsx";
-import KitchenBlock from "@/components/blocks/KitchenBlock.tsx";
-import DeliveryBlock from "@/components/blocks/DeliveryBlock.tsx";
+import KitchenBlock from "@/components/blocks/Kitchen/KitchenBlock.tsx";
+import DeliveryBlock from "@/components/blocks/Delivery/DeliveryBlock.tsx";
 import FinishBlock from "@/components/blocks/FinishBlock.tsx";
 import {type BlockType, BLOCK_TYPE, BLOCKS_ORDERED} from "@/types/blocks.tsx";
 

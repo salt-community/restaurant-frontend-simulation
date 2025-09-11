@@ -10,9 +10,9 @@ export default function PaymentBlock({setButtonDisabled}: PaymentBlockProps) {
     setButtonDisabled(true);
   }, []);
   return (
-    <>
+    <div>
       <a>Payment Block</a>
       <PaymentForm onSubmit={() => {setButtonDisabled(false)}}/>
-    </>
+    </div>
   )
 }
