@@ -1,16 +1,18 @@
 import {useEffect, useState} from "react";
-import Spinner from "@/components/util/Spinner.tsx";
 import {fetchKitchenApproval} from "@/api/fetchKitchenApproval.ts";
+import Spinner from "@/components/util/Spinner.tsx";
 
-interface KitchenBlockProps {
+interface DeliveryBlockProps {
   gotoNext: () => void
 }
 
-export default function KitchenBlock({gotoNext}: KitchenBlockProps) {
+export default function DeliveryBlock({gotoNext}: DeliveryBlockProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
+
+    // Disable the NEXT button while waiting
 
     (async () => {
       try {
@@ -31,18 +33,16 @@ export default function KitchenBlock({gotoNext}: KitchenBlockProps) {
       cancelled = true;
     };
   }, []);
-
   return (
     <div>
-      <a>Kitchen Block</a>
-      {loading ? (
-        <div className="flex items-center gap-2">
-          <span>- Waiting for approval...</span>
-          <Spinner/>
-        </div>
-      ) : (
-        <div className="text-green-700">- Approved! You can continue.</div>
-      )}
+      <a>Delivery Block</a>
+      {loading
+        ? <div className="flex items-center gap-2">
+            <span>- Waiting for delivery...</span>
+            <Spinner/>
+          </div>
+        : <div className="text-green-700">- Delivered!</div>
+      }
     </div>
   )
 }

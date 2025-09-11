@@ -12,12 +12,19 @@ function App() {
   const [currentBlock, setCurrentBlock] = useState<BlockType>(BLOCK_TYPE.ORDER)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const currentStep = BLOCKS_ORDERED.indexOf(currentBlock)
+
+  const handleNextBlock = () => {
+    const idx = BLOCKS_ORDERED.indexOf(currentBlock)
+    setCurrentBlock(BLOCKS_ORDERED[(idx + 1) % BLOCKS_ORDERED.length])
+    setButtonDisabled(true)
+  }
+
   const blockTypeMapToComponent: Record<BlockType, JSX.Element> = {
     ORDER: <OrderBlock buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}/>,
     PAYMENT: <PaymentBlock setButtonDisabled={setButtonDisabled}/>,
     ADDRESS: <AddressBlock setButtonDisabled={setButtonDisabled}/>,
-    KITCHEN: <KitchenBlock setButtonDisabled={setButtonDisabled}/>,
-    DELIVERY: <DeliveryBlock setButtonDisabled={setButtonDisabled}/>,
+    KITCHEN: <KitchenBlock gotoNext={handleNextBlock}/>,
+    DELIVERY: <DeliveryBlock gotoNext={handleNextBlock}/>,
     FINISH: <FinishBlock setButtonDisabled={setButtonDisabled}/>,
   }
   return (
@@ -33,14 +40,14 @@ function App() {
         <button
           className="border-2 border-black rounded-md p-2 enabled:hover:bg-gray-200 disabled:opacity-50"
           disabled={buttonDisabled}
-          onClick={() => {
-          const idx = BLOCKS_ORDERED.indexOf(currentBlock)
-          setCurrentBlock(BLOCKS_ORDERED[(idx + 1) % BLOCKS_ORDERED.length])
-          setButtonDisabled(true)
-        }}>{currentBlock!=BLOCK_TYPE.FINISH
-            ? "NEXT"
-            : "MENU"
-        }</button>
+          onClick={handleNextBlock}
+        >
+          {
+            currentBlock!=BLOCK_TYPE.FINISH
+              ? "NEXT"
+              : "MENU"
+          }
+        </button>
       </div>
     </>
   )
