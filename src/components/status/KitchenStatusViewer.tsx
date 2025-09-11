@@ -10,14 +10,14 @@ export function KitchenStatusViewer({ orderId }: { orderId: string }) {
     return <div>No kitchen status available for order ID: {orderId}</div>;
 
   return (
-    <div style={{ fontFamily: "system-ui", lineHeight: 1.5 }}>
-      <div>Order: {data.orderId}</div>
+    <div>
+      {/* <div>Order: {data.orderId}</div> */}
       <div>Status: {data.status}</div>
-      <div>
+      {/* <div>
         ETA:
         {data.estimatedReadyAt ? data.estimatedReadyAt.toLocaleString() : "-"}
       </div>
-      <div>Updated: {data.updatedAt.toLocaleString()}</div>
+      <div>Updated: {data.updatedAt.toLocaleString()}</div> */}
     </div>
   );
 }
