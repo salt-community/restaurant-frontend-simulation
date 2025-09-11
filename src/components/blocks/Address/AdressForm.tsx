@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {type ChangeEvent, type FormEvent, useState} from "react";
 
 const counties = [
   "Stockholms län",
@@ -39,13 +39,13 @@ export default function AddressForm({ onSubmit }: AddressFormProps) {
     country: "Sverige",
   });
 
-  const handleChange = (e) => {
-    console.log("EVENT: " + e.target.name, e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("EVENT: " + e);
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!/^\d{5}$/.test(form.postalCode)) {
       alert("Postnummer måste vara 5 siffror.");
