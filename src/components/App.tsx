@@ -13,7 +13,7 @@ function App() {
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const currentStep = BLOCKS_ORDERED.indexOf(currentBlock)
   const blockTypeMapToComponent: Record<BlockType, JSX.Element> = {
-    ORDER: <OrderBlock setButtonDisabled={setButtonDisabled}/>,
+    ORDER: <OrderBlock buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}/>,
     PAYMENT: <PaymentBlock setButtonDisabled={setButtonDisabled}/>,
     ADDRESS: <AddressBlock setButtonDisabled={setButtonDisabled}/>,
     KITCHEN: <KitchenBlock setButtonDisabled={setButtonDisabled}/>,
