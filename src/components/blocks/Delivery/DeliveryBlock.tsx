@@ -3,47 +3,55 @@ import Spinner from "@/components/util/Spinner.tsx";
 import {fetchDeliveryStatus} from "@/api/fetchDeliveryStatus.ts";
 
 interface DeliveryBlockProps {
-  gotoNext: () => void
+  orderId: string;
+  gotoNext: () => void;
 }
 
-export default function DeliveryBlock({gotoNext}: DeliveryBlockProps) {
+export default function DeliveryBlock({orderId, gotoNext}: DeliveryBlockProps) {
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    // Disable the NEXT button while waiting
-
-    (async () => {
+    const pollStatus = async () => {
       try {
-        //TODO: replace with actual orderId
-        await fetchDeliveryStatus(crypto.randomUUID());
-        if (!cancelled) {
-          gotoNext()
+        const currentStatus = await fetchDeliveryStatus(orderId);
+        if (cancelled) return;
+
+        setStatus(currentStatus);
+        if (currentStatus === "COMPLETED") {
           setLoading(false);
+          gotoNext();
+        } else {
+          setLoading(true);
+          // Poll again in 3 seconds
+          setTimeout(pollStatus, 3000);
         }
-      } catch {
-        if (!cancelled) {
-          // In case of error, keep NEXT disabled or handle as needed
-          setLoading(false);
-        }
+      } catch (err) {
+        console.error("Failed to fetch delivery status", err);
+        if (!cancelled) setLoading(true);
+        setTimeout(pollStatus, 5000); // retry in 5s if error
       }
-    })();
+    };
+
+    pollStatus();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [orderId, gotoNext]);
+
   return (
     <div>
       <a>Delivery Block</a>
       {loading
         ? <div className="flex items-center gap-2">
             <span>- Waiting for delivery...</span>
-            <Spinner/>
+            <Spinner />
           </div>
         : <div className="text-green-700">- Delivered!</div>
       }
     </div>
-  )
+  );
 }
