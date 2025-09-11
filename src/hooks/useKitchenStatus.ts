@@ -15,7 +15,7 @@ export function useKitchenStatus(orderId: string | null) {
     enabled: Boolean(orderId),
     queryFn: ({ signal }) =>
       orderId ? fetchKitchenStatus(orderId, signal) : Promise.resolve(null),
-    slect: (data: KitchenStatusResponse | null) =>
+    select: (data: KitchenStatusResponse | null) =>
       data
         ? {
             ...data,
@@ -25,8 +25,10 @@ export function useKitchenStatus(orderId: string | null) {
             updatedAt: new Date(data.updatedAt).toLocaleTimeString(),
           }
         : null,
-    refetchInterval: (data) =>
-      !data || (data && !isTerminal(data.status)) ? 3000 : false,
+    refetchInterval: (query) => {
+      const d = query.state.data;
+      return !d || !isTerminal(d.status) ? 3000 : false;
+    },
     staleTime: 10_000,
     refetchOnWindowFocus: false,
     retry: 2,
