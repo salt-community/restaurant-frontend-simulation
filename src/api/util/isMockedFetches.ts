@@ -1,1 +1,1 @@
-export default function isMockedFetches() { return false; }
+export default function isMockedFetches() { return true; }
